@@ -22,6 +22,8 @@ Select the "default" VM created by docker-machine and enable USB2.  Add your
 device to the USB Device Filters to make the device visible in the docker
 container.
 
+![VirtualBox USB Settings](https://github.com/runtimeinc/newt-docker/raw/master/docs/img/virtualbox_usb.jpg)
+
 *NOTE:* We've found that restart is required after installing the extension
 pack and enabling USB2 for the first time.
 
