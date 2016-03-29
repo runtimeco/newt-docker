@@ -33,7 +33,7 @@ Use the newt wrapper script to invoke newt.
 ```
 #!/bin/bash
 
-docker run -ti --rm --device=/dev/bus/usb --privileged -v $(pwd):/workspace -w /workspace newt:0.8.0-b2 /newt $@
+docker run -ti --rm --device=/dev/bus/usb --privileged -v $(pwd):/workspace -w /workspace mynewt/newt:0.8.0-b2 /newt $@
 ```
 
 This will allow you to run newt as if it was natively installed.  You can now
