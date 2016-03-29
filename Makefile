@@ -17,4 +17,5 @@ newt-image: newt-binary
 
 newt: newt-image
 	sed "s/\$${VERSION}/$(NEWT_VERSION)/" templates/newt > newt
-	chmod a+x newt
+	sed "s/\$${VERSION}/$(NEWT_VERSION)/" templates/newtmgr > newtmgr
+	chmod a+x newt newtmgr
