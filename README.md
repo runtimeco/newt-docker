@@ -18,11 +18,17 @@ Pack](http://download.virtualbox.org/virtualbox/5.0.16/Oracle_VM_VirtualBox_Exte
 and double click to install.
 
 ### Enable USB2 and select your device
-Select the "default" VM created by docker-machine and enable USB2.  Add your
-device to the USB Device Filters to make the device visible in the docker
-container.
+* The "default" VM created by docker-machine must first be stopped before you
+  can enable USB2.  You can run the command `docker-machine stop default` or
+  use the VirtualBox UI to stop the VM.
+* Enable USB2 using the VirtualBox UI. Select the "default"
+  VM->Settings->Ports->USB2 to enable USB2.   Add your device to the USB Device
+  Filters to make the device visible in the docker container.  See the image below.
 
 ![VirtualBox USB Settings](https://github.com/runtimeinc/newt-docker/raw/master/docs/img/virtualbox_usb.jpg)
+
+* Restart the "default" VM by running `docker-machine start default` or by
+  using the VirtualBox UI.
 
 *NOTE:* We've found that restart is required after installing the extension
 pack and enabling USB2 for the first time.
