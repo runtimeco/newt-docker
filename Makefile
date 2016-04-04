@@ -10,12 +10,7 @@ newt-binary: clean
 	mkdir _scratch
 	docker run --rm -v $(PWD)/_scratch:/go golang:1.6 go get mynewt.apache.org/newt/...
 
-newt-image: newt-binary
+newt: newt-binary
 	$(eval NEWT_VERSION := $(shell docker run --rm -v $(PWD)/_scratch:/_scratch -w /_scratch golang:1.6 bin/newt version | cut -d: -f2))
 	docker build -t newt:$(NEWT_VERSION) -f Dockerfile .
 	docker tag newt:$(NEWT_VERSION) newt:latest
-
-newt: newt-image
-	sed "s/\$${VERSION}/$(NEWT_VERSION)/" templates/newt > newt
-	sed "s/\$${VERSION}/$(NEWT_VERSION)/" templates/newtmgr > newtmgr
-	chmod a+x newt newtmgr
