@@ -1,10 +1,15 @@
 TOOLCHAIN_VERSION:=1.0.0
 
 all:
+	@echo "make toolchain-image"
 	@echo "make newt"
 
 clean:
 	rm -rf _scratch
+
+toolchain-image:
+	docker build -t toolchain:$(TOOLCHAIN_VERSION) -f Dockerfile.toolchain .
+	docker tag toolchain:$(TOOLCHAIN_VERSION) toolchain:latest
 
 newt-binary: clean
 	mkdir _scratch
