@@ -1,4 +1,4 @@
-TOOLCHAIN_VERSION:=1.0.0
+TOOLCHAIN_VERSION:=1.0.2
 
 all:
 	@echo "make toolchain-image"
