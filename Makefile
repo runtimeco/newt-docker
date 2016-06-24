@@ -5,14 +5,14 @@ all:
 	@echo "make newt"
 
 clean:
-	rm -rf _scratch
+	@rm -rf _scratch
 
 toolchain-image:
 	docker build -t toolchain:$(TOOLCHAIN_VERSION) -f Dockerfile.toolchain .
 	docker tag toolchain:$(TOOLCHAIN_VERSION) toolchain:latest
 
 newt-binary: clean
-	mkdir _scratch
+	mkdir -p _scratch
 	docker run --rm -v $(PWD)/_scratch:/go golang:1.6 go get mynewt.apache.org/newt/...
 
 newt: newt-binary
