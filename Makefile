@@ -1,4 +1,4 @@
-TOOLCHAIN_VERSION:=1.0.2
+TOOLCHAIN_VERSION:=3
 
 all:
 	@echo "make toolchain-image"
@@ -17,5 +17,5 @@ newt-binary: clean
 
 newt: newt-binary
 	$(eval NEWT_VERSION := $(shell docker run --rm -v $(PWD)/_scratch:/_scratch -w /_scratch golang:1.7 bin/newt version | cut -d: -f2))
-	docker build -t newt:$(NEWT_VERSION) -f Dockerfile .
-	docker tag newt:$(NEWT_VERSION) newt:latest
+	docker build -t newt:$(NEWT_VERSION)-$(TOOLCHAIN_VERSION) -f Dockerfile .
+	docker tag newt:$(NEWT_VERSION)-$(TOOLCHAIN_VERSION) newt:latest
