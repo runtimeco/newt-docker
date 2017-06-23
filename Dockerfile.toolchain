@@ -1,18 +1,17 @@
-FROM ubuntu:wily
+FROM ubuntu:xenial
 MAINTAINER runtime.io <contact@runtime.io>
 
 ENV DEBIAN_FRONTEND noninteractive
 
-# gcc-arm-none-eabi and gdb-arm-none-eabi are pulled from ppa:team-gcc-arm-embedded/ppa
-RUN echo 'deb http://ppa.launchpad.net/team-gcc-arm-embedded/ppa/ubuntu wily main ' > /etc/apt/sources.list.d/gcc-arm-embedded-wily.list && \
+# gcc-arm-embedded is pulled from ppa:team-gcc-arm-embedded/ppa
+RUN echo 'deb http://ppa.launchpad.net/team-gcc-arm-embedded/ppa/ubuntu xenial main ' > /etc/apt/sources.list.d/gcc-arm-embedded.list && \
     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys F64D33B0  && \
     apt-get update && \
     apt-get install -y sudo \
                     git \
                     libc6-i386 \
                     gcc-multilib \
-                    gcc-arm-none-eabi \
-                    gdb-arm-none-eabi \
+                    gcc-arm-embedded \
                     gdb \
                     openocd && \
     apt-get autoremove && \
