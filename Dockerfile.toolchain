@@ -1,22 +1,23 @@
-FROM ubuntu:wily
+FROM ubuntu:xenial
 MAINTAINER runtime.io <contact@runtime.io>
 
 ENV DEBIAN_FRONTEND noninteractive
 
-RUN apt-get update && \
+# gcc-arm-embedded is pulled from ppa:team-gcc-arm-embedded/ppa
+RUN echo 'deb http://ppa.launchpad.net/team-gcc-arm-embedded/ppa/ubuntu xenial main ' > /etc/apt/sources.list.d/gcc-arm-embedded.list && \
+    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys F64D33B0  && \
+    apt-get update && \
     apt-get install -y sudo \
                     curl \
                     bzip2 \
                     git \
                     libc6-i386 \
                     gcc-multilib \
+                    gcc-arm-embedded \
                     gdb \
                     openocd && \
     apt-get autoremove && \
     apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-COPY install_gcc-arm-none-eabi.sh /tmp
-RUN /tmp/install_gcc-arm-none-eabi.sh
 
 COPY jlink_5.12.3_x86_64.deb /tmp/
 RUN dpkg -i /tmp/jlink_5.12.3_x86_64.deb; dpkg-query -l; rm /tmp/jlink_5.12.3_x86_64.deb
