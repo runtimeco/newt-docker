@@ -1,9 +1,10 @@
 TOOLCHAIN_VERSION := 6
 GO_VERSION := 1.10.4
 MYNEWT_RELEASE := 1_4_1
-JLINK_BIN := JLink_Linux_x86_64.deb
+JLINK_RELEASE := 634h
+JLINK_BIN := JLink_Linux_V$(JLINK_RELEASE)_x86_64.deb
 JLINK_URL := https://www.segger.com/downloads/jlink
-JLINK_CHKS := $(JLINK_BIN).md5
+JLINK_CHKS := $(JLINK_BIN).sha256
 
 all:
 	@echo "make toolchain-image"
@@ -14,10 +15,10 @@ clean:
 
 $(JLINK_BIN):
 	curl -X POST -d "accept_license_agreement=accepted" -o $(JLINK_BIN) $(JLINK_URL)/$(JLINK_BIN)
-	md5sum --check $(JLINK_CHKS)
+	shasum -c $(JLINK_CHKS)
 
 toolchain-image: $(JLINK_BIN)
-	docker build -t toolchain:$(TOOLCHAIN_VERSION) -f Dockerfile.toolchain .
+	docker build -t toolchain:$(TOOLCHAIN_VERSION) --build-arg JLINK_RELEASE=$(JLINK_RELEASE) -f Dockerfile.toolchain .
 	docker tag toolchain:$(TOOLCHAIN_VERSION) toolchain:latest
 
 newt-binary: clean

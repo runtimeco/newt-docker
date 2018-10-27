@@ -3,6 +3,8 @@ MAINTAINER runtime.io <contact@runtime.io>
 
 ENV DEBIAN_FRONTEND noninteractive
 
+ARG JLINK_RELEASE
+
 # gcc-arm-embedded is pulled from ppa:team-gcc-arm-embedded/ppa
 RUN apt-get update && \
     apt-get install -y gnupg && \
@@ -23,8 +25,8 @@ RUN apt-get update && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-COPY JLink_Linux_x86_64.deb /tmp/
+COPY JLink_Linux_V${JLINK_RELEASE}_x86_64.deb /tmp/
 
-RUN dpkg -i /tmp/JLink_Linux_x86_64.deb && \
+RUN dpkg -i /tmp/JLink_Linux_V${JLINK_RELEASE}_x86_64.deb && \
     dpkg-query -l && \
-    rm /tmp/JLink_Linux_x86_64.deb
+    rm /tmp/JLink_Linux_V${JLINK_RELEASE}_x86_64.deb
