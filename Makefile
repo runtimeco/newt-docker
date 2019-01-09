@@ -1,6 +1,6 @@
 TOOLCHAIN_VERSION := 6
 GO_VERSION := 1.10.4
-MYNEWT_RELEASE := 1_4_1
+MYNEWT_RELEASE := 1_5_0
 JLINK_RELEASE := 634h
 JLINK_BIN := JLink_Linux_V$(JLINK_RELEASE)_x86_64.deb
 JLINK_URL := https://www.segger.com/downloads/jlink
