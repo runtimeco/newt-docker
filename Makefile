@@ -23,8 +23,8 @@ toolchain-image: $(JLINK_BIN)
 
 newt-binary: clean
 	mkdir -p _scratch
-	docker run --rm -v $(PWD)/_scratch:/go/bin -e "GOPATH=/go" golang:$(GO_VERSION) bash -c "git clone -b mynewt_$(MYNEWT_RELEASE)_tag https://github.com/apache/mynewt-newt.git /go/src/mynewt.apache.org/newt && cd /go/src/mynewt.apache.org/newt && ./build.sh && mv /go/src/mynewt.apache.org/newt/newt/newt /go/bin/newt && chown $(shell id  -u):$(shell id -g) /go/bin/*"
-	docker run --rm -v $(PWD)/_scratch:/go/bin -e "GOPATH=/go" golang:$(GO_VERSION) bash -c "git clone -b mynewt_$(MYNEWT_RELEASE)_tag https://github.com/apache/mynewt-newtmgr.git /go/src/mynewt.apache.org/newtmgr && cd /go/src/mynewt.apache.org/newtmgr/newtmgr && go build && mv newtmgr /go/bin/newtmgr && chown $(shell id  -u):$(shell id -g) /go/bin/*"
+	docker run --rm -v $(PWD)/_scratch:/go/bin -e "GOPATH=/go" golang:$(GO_VERSION) bash -c "git clone --depth=1 -b mynewt_$(MYNEWT_RELEASE)_tag https://github.com/apache/mynewt-newt.git /go/src/mynewt.apache.org/newt && cd /go/src/mynewt.apache.org/newt && ./build.sh && mv /go/src/mynewt.apache.org/newt/newt/newt /go/bin/newt && chown $(shell id  -u):$(shell id -g) /go/bin/*"
+	docker run --rm -v $(PWD)/_scratch:/go/bin -e "GOPATH=/go" golang:$(GO_VERSION) bash -c "git clone --depth=1 -b mynewt_$(MYNEWT_RELEASE)_tag https://github.com/apache/mynewt-newtmgr.git /go/src/mynewt.apache.org/newtmgr && cd /go/src/mynewt.apache.org/newtmgr/newtmgr && go build && mv newtmgr /go/bin/newtmgr && chown $(shell id  -u):$(shell id -g) /go/bin/*"
 
 newt: newt-binary
 	$(eval NEWT_VERSION := $(shell docker run --rm -v $(PWD)/_scratch:/_scratch -w /_scratch golang:$(GO_VERSION) ./newt version | cut -d: -f2 -s | head -n 1))
