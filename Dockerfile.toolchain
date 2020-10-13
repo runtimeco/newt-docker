@@ -20,6 +20,7 @@ RUN apt-get update && \
                     gcc-arm-embedded \
                     gdb \
                     openocd \
+                    python3-pip \
                     netcat && \
     apt-get autoremove && \
     apt-get clean && \
@@ -30,3 +31,6 @@ COPY JLink_Linux_V${JLINK_RELEASE}_x86_64.deb /tmp/
 RUN dpkg -i /tmp/JLink_Linux_V${JLINK_RELEASE}_x86_64.deb && \
     dpkg-query -l && \
     rm /tmp/JLink_Linux_V${JLINK_RELEASE}_x86_64.deb
+
+RUN pip3 install pyocd
+
