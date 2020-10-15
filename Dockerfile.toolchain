@@ -65,14 +65,12 @@ RUN cd /usr/src/ \
       --enable-ftdi \
       --enable-gw16012 \
       --enable-imx_gpio \
-      --enable-ioutil \
       --enable-jlink \
       --enable-jtag_dpi \
       --enable-jtag_vpi \
       --enable-kitprog \
       --enable-linuxgpiod \
       --enable-nulink \
-      --enable-oocd_trace \
       --enable-opendous \
       --enable-openjtag \
       --enable-osbdm \
@@ -92,7 +90,6 @@ RUN cd /usr/src/ \
       --enable-vsllink \
       --enable-xlnx-pcie-xvc \
       --enable-xds110 \
-      --enable-zy1000-master \
     && make -j"$(nproc)" \
     && make install \
     && cp /usr/local/share/openocd/contrib/60-openocd.rules /etc/udev/rules.d/60-openocd.rules \
