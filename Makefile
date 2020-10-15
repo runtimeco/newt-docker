@@ -9,6 +9,7 @@ JLINK_RELEASE := 648
 JLINK_BIN := JLink_Linux_V$(JLINK_RELEASE)_x86_64.deb
 JLINK_URL := https://www.segger.com/downloads/jlink
 JLINK_CHKS := $(JLINK_BIN).sha256
+OPENOCD_RELEASE := b3a4f771
 
 all:
 	@echo "make toolchain-image"
