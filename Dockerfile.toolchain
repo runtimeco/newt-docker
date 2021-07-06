@@ -1,5 +1,5 @@
 FROM ubuntu:bionic
-MAINTAINER runtime.io <contact@runtime.io>
+MAINTAINER Mynewt developers <dev@mynewt.apache.org>
 
 ENV DEBIAN_FRONTEND noninteractive
 
